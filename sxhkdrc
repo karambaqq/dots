@@ -1,0 +1,244 @@
+#
+# wm independent hotkeys
+#
+	
+# terminal emulator
+super + Return
+    kitty	
+
+# program launcher
+super + d
+	rofi -show run
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd; \
+	notify-send "Config reload"
+
+#
+# bspwm hotkeys
+#
+
+# quit bspwm normally
+super + alt + Escape
+	bspc quit
+
+# close and kill
+super + shift + q
+	bspc node -c
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
+super + y
+	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest
+
+#
+# state/flags
+#
+
+# set the window state
+super + {s,shift + t,f,p}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen};:;
+
+# set the node flags
+super + ctrl + {x,y,z}
+	bspc node -g {locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local
+
+# focus the next/previous desktop in the current monitor
+#super + bracket{left,right}
+#	bspc desktop -f {prev,next}.local
+
+super + shift + bracket{left,right}
+	bspc node -d {prev,next}.local -f
+
+# focus the last node/desktop
+super + {grave}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + r : {Left, Down, Up, Right, h, j, k, l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0, right -20 0,top 0 20,bottom 0 -20,left 20 0}
+#
+## super + l : {Left, Down, Up, Right}
+##	bspc node -z {left 0 -20,bottom 20 0,top -20 0,right 0 20}
+#
+## contract a window by moving one of its side inward
+#super + shift + {Left,Down,Up,Right}
+#	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+#
+
+# expand a window by moving one of its side outward
+#super + alt + {h,j,k,l}
+#	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+
+# move a floating window
+super + ctrl + shift + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#
+# Keybindings
+#
+
+super + n
+		kitty nvim
+
+super + a
+		subl3 -n
+
+super + e
+		nautilus -w
+
+super + w
+		firefox-developer
+
+super + t
+		/opt/Telegram/Telegram
+
+
+#
+# Screenshots
+#
+Print
+	scrot ~/screenshots/screenshot-$(date +%F_%T).png -e; \
+	notify-send "Screenshot saved"
+
+ctrl + Print
+	scrot ~/screenshots/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'; \
+	notify-send "Screenshot copied to clipboard"
+
+alt + Print
+	scrot -s ~/screenshots/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'; \
+	notify-send "Screenshot saved"
+
+shift + Print
+	scrot -u ~/screenshots/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'; \
+	notify-send "Screenshot copied to clipboard"
+
+#
+# Reducing gap on the fly
+#
+
+alt + {minus,equal}
+    bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
+
+
+
+#
+#  Brightness
+#
+
+
+# Sreen brightness controls
+XF86MonBrightnessUp
+	xbacklight -inc 5
+
+XF86MonBrightnessDown
+	xbacklight -dec 5 
+
+
+#
+# Audio
+#
+XF86AudioRaiseVolume
+	pactl -- set-sink-volume 0 +5% #increase sound volume
+
+XF86AudioLowerVolume
+	pactl -- set-sink-volume 0 -5% #decrease sound volume
+
+XF86AudioMute
+	pactl set-sink-mute 0 toggle # mute sound
+
+XF86AudioNext
+	/usr/local/bin/spotify-control.sh next
+
+XF86AudioPrev
+	/usr/local/bin/spotify-control.sh prev
+
+XF86AudioPlay
+	/usr/local/bin/spotify-control.sh play
+
+
+#
+# Lock
+#
+
+super + shift + s
+		i3lock-next -font Iosevka Term
+		#$HOME/dotfiles/scripts/lock.sh
+
+
+#
+#DESKTOPS
+#
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}' 
+
+#
+# focus the next/previous desktop
+super + bracket{left,right}
+	bspc desktop -f {prev,next}  
+
+super + shift + bracket{left,right}
+	bspc desktop -f {prev,next} &&  
+	bspc {desktop -f,node -d}{prev, next}
+

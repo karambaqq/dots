@@ -1,0 +1,25 @@
+#! /bin/sh
+
+
+bspc monitor -d code 0 1 2 3 4 5 6 7 8 9
+
+bspc config border_width         	1
+bspc config focused_border_color 	'#62C07B'
+bspc config window_gap          	55	
+
+bspc config borderless_monocle   	true
+bspc config gapless_monocle      	false
+bspc config focus_follows_pointer 	true
+#bspc rule -a kitty state=floating
+#bspc rule -a urxvt state=floating
+# while read a m d n; do [[ $(bspc query -N -d $d | wc -l) == 1 ]] && bspc node $n -t floating; done < <(bspc subscribe node_focus)
+
+# launch stuff
+sxhkd &
+polybar main_bar &
+dunst &
+compton &
+xrdb ~/.extend.Xresources
+nitrogen --restore
+nm-applet &
+keyboard.sh

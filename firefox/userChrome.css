@@ -1,0 +1,210 @@
+input::-moz-placeholder {
+color: #000000 !important;
+}
+
+.toolbarbutton-animatable-box[brighttext], toolbar[brighttext] .toolbarbutton-animatable-box, toolbar[brighttext] .toolbarbutton-1 {
+	fill:  #54BB6F !important;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.verifiedDomain > #connection-icon, #urlbar[pageproxystate="valid"] > #identity-box.verifiedIdentity > #connection-icon, #urlbar[pageproxystate="valid"] > #identity-box.mixedActiveBlocked > #connection-icon {
+	list-style-image: url(chrome://browser/skin/connection-secure.svg);
+	visibility: visible;
+	-moz-context-properties: fill;
+	fill: #000000 !important;
+}
+
+#urlbar:-moz-lwtheme, #navigator-toolbox .searchbar-textbox:-moz-lwtheme {
+	background-color: var(--url-and-searchbar-background-color, hsla(0,0%,100%,.8));
+	color: black!important;
+}
+
+.tabbrowser-tab[visuallyselected="true"]:-moz-lwtheme {
+	color: black !important;
+}
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#main-window {
+--UI-colour: #54BB6F;
+--chrome-background-color: #212121 !important;
+--chrome-selection-background-color: grey !important;
+--urlbar-separator-color: transparent !important;
+fill: rgb(0, 0, 0);
+}
+
+#TabsToolbar .close-icon, .titlebar-placeholder[type="pre-tabs"], #PanelUI-menu-button, #pageActionButton, #navigator-toolbox::after, .tab-line {
+display: none !important;
+}
+
+.tab-throbber::before {
+fill: #fff !important;
+opacity: 0.8 !important;
+}
+
+
+#reader-mode-button {
+margin-right: -12px !important;
+}
+
+#reader-mode-button[readeractive] {
+fill: #fff !important;
+}
+
+#main-window[sizemode="normal"] #toolbar-menubar[inactive] ~ #TabsToolbar  {
+margin: 0px !important;
+}
+
+#main-window[sizemode="normal"] .tab-background[selected="true"] {
+border-radius: 0px !important;
+border-top: 0px !important;
+}
+
+#main-window[sizemode="normal"] #nav-bar {
+margin-top: -1px !important;
+}
+
+#nav-bar, .tab-background[selected="true"] {
+background: #54BB6F!important;
+border: 1px solid #ffffff40 !important;
+}
+
+#nav-bar {
+border-left: none !important;
+border-right: none !important;
+}
+
+.tab-background[selected="true"] {
+border-bottom: none !important;
+border-radius: 2px 2px 0px 0px;
+margin-left: -1px !important;
+}
+
+
+#TabsToolbar .tabbrowser-tab {
+font-size: 14px !important;
+filter: opacity(70%) !important;
+transition-property: filter !important;
+transition-duration: 0.1s !important;
+}
+
+#TabsToolbar .tabbrowser-tab[selected], #TabsToolbar .tabbrowser-tab:hover {
+filter: opacity(1) !important;
+}
+
+#TabsToolbar .tabbrowser-tab:hover .close-icon{
+display: inline-block !important;
+}
+
+#personal-bookmarks .bookmark-item > .toolbarbutton-icon {
+height: 27px !important;
+width: 27px !important;
+border: 3px solid transparent !important;
+border-radius: 3px !important;
+}
+
+.bookmark-item {
+background: none !important;
+margin: 0px !important;
+}
+
+.bookmark-item:hover .toolbarbutton-icon {
+background: #ffffff40 !important;
+border-color: #ffffff40 !important;
+}
+
+#urlbar, .searchbar-textbox {
+font-size: 14px !important;
+background: #ffffff30 !important;
+box-shadow: none !important;
+border: 1px solid #ffffff40 !important;
+border-radius: 2px !important;
+}
+
+.autocomplete-richlistbox {
+background: #212121 !important;
+margin: -1px !important;
+margin-bottom: 0px !important;
+padding: 0px !important;
+}
+
+/* Find Bar */
+findbar {
+  -moz-box-ordinal-group: 0   !important;
+  direction:              rtl !important;
+
+  /* uncomment for speedy boi */
+  transition-property:        unset !important;
+  transition-duration:        unset !important;
+  transition-timing-function: unset !important;
+  
+  /* These two lines should fix the border (previously its on the upside, you wanna flip it over)*/
+  border-top-width:           0                                            !important;
+  border-bottom:              1px solid var(--toolbox-border-bottom-color) !important;
+  
+}
+
+findbar .findbar-textbox {
+  direction: ltr !important;
+}
+/* Find Bar */
+
+/* hide tab bar if only one tab */
+tab:nth-last-of-type(-n+1):first-of-type, tab:nth-last-of-type(-n+1):first-of-type ~ tab { 
+    display:none; 
+}
+
+
+/* unset the tab bar min-height */ 
+#tabbrowser-tabs, #tabbrowser-tabs > .tabbrowser-arrowscrollbox, #tabbrowser-tabs[positionpinnedtabs] > .tabbrowser-tab[pinned] {
+    min-height: initial !important;
+}
+
+/* set the height on the tabs instead */
+tab { 
+    line-height: 35px; height: 45px; 
+}
+
+/* hide new tab button so tab-bar can collapse */
+.tabs-newtab-button { 
+    display: none; 
+}
+
+/* ...but show it on tab-bar hover */
+#tabbrowser-tabs:hover .tabs-newtab-button { 
+    display: block; 
+}
+
+#identity-icon-labels {
+  display: none !important;
+}
+
+ #identity-icon {
+  display: none !important;
+}
+
+#urlbar{
+    border-radius: 2em !important;
+}
+
+#urlbar, .searchbar-textbox{
+    border-radius: 2em !important;
+}
+
+
+.tabbrowser-tab[visuallyselected="true"]:-moz-lwtheme {
+    color: #000000;
+}
+
+
+.toolbarbutton-animatable-box[brighttext], toolbar[brighttext] .toolbarbutton-animatable-box, toolbar[brighttext] .toolbarbutton-1 {
+    fill: black !important;
+}
+
+
+.back_button{
+  fill: #000000 !important;
+}
+
+.toolbarbutton-animatable-box[brighttext], toolbar[brighttext] .toolbarbutton-animatable-box, toolbar[brighttext] .toolbarbutton-1 {
+	fill: rgb(0, 0, 0) !important;
+}
